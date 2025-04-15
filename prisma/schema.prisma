@@ -4,6 +4,10 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+// prisma-client-js 是最常用的生成器，适用于 JavaScript/TypeScript 项目。
+// 其他生成器（如 prisma-client-py、prisma-client-go）针对特定语言。
+// 特殊用途的生成器（如 prisma-nexus、prisma-erd-generator）用于生成 GraphQL API 或实体关系图。
+// 自定义生成器（prisma-generator）允许开发者扩展 Prisma 的功能。
 generator client {
   provider = "prisma-client-js"
 }

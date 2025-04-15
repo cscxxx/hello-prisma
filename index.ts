@@ -3,36 +3,33 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  // ... you will write your Prisma Client queries here
-  // --------- 查询
-  //   const allUsers = await prisma.user.findMany();
-  //   console.log(allUsers);
-  // --------- 新增
-  //   await prisma.user.create({
-  //     data: {
-  //       name: "Alice",
-  //       email: "alice@prisma.io",
-  //       posts: {
-  //         create: { title: "Hello World" },
-  //       },
-  //       profile: {
-  //         create: { bio: "I like turtles" },
-  //       },
-  //     },
-  //   });
-  //   const allUsers = await prisma.user.findMany({
-  //     include: {
-  //       posts: true,
-  //       profile: true,
-  //     },
-  //   });
-  //   console.dir(allUsers, { depth: null });
-  // --------- 更新
-  const post = await prisma.post.update({
-    where: { id: 1 },
-    data: { published: true },
+  // 创建用户
+  const user = await prisma.user.create({
+    data: {
+      name: "Bob",
+      email: "bob@example.com",
+      profile: {
+        create: {
+          bio: "I am a developer.",
+        },
+      },
+      posts: {
+        create: {
+          title: "My First Post",
+          content: "This is the content of my first post.",
+          published: true,
+        },
+      },
+    },
+    include: {
+      posts: true,
+      profile: true,
+    },
   });
-  console.log(post);
+
+  console.log("Created user:", user);
+
+  // 你可以在这里添加更多的数据操作
 }
 
 main()

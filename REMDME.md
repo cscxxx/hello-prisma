@@ -1,5 +1,5 @@
 ```
-迁移数据与创建数据库表
+迁移数据与创建数据库表，执行会创建数据库中的表
 npx prisma migrate dev --name init
 
 执行脚本
