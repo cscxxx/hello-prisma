@@ -3,33 +3,33 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  // 创建用户
-  const user = await prisma.user.create({
+  // 创建标签
+  const tag1 = await prisma.tag.create({
+    data: { name: "技术" },
+  });
+  const tag2 = await prisma.tag.create({
+    data: { name: "编程" },
+  });
+
+  // 创建文章并关联标签
+  const post = await prisma.post.create({
     data: {
-      name: "Bob",
-      email: "bob@example.com",
-      profile: {
-        create: {
-          bio: "I am a developer.",
-        },
+      title: "带标签的文章",
+      content: "这篇文章有一些标签。",
+      published: true,
+      author: {
+        connect: { id: 1 }, // 假设存在 id 为 1 的用户
       },
-      posts: {
-        create: {
-          title: "My First Post",
-          content: "This is the content of my first post.",
-          published: true,
-        },
+      tags: {
+        connect: [{ id: tag1.id }, { id: tag2.id }],
       },
     },
     include: {
-      posts: true,
-      profile: true,
+      tags: true,
     },
   });
 
-  console.log("Created user:", user);
-
-  // 你可以在这里添加更多的数据操作
+  console.log("创建带标签的文章:", post);
 }
 
 main()

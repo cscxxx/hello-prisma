@@ -26,6 +26,16 @@ model Post {
   published Boolean  @default(false)
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
+  // 添加 tags 关联
+  tags      Tag[]
+}
+
+// 新增 Tag 模型
+model Tag {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  // 关联 Post 模型
+  posts Post[]
 }
 
 model Profile {
